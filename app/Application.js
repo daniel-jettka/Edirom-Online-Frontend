@@ -130,32 +130,35 @@ Ext.define('EdiromOnline.Application', {
 
                     // If there are multiple editions in the backend show a selection screen
                     }else {
-                        let html = `<div class="container" style="margin: 8.75%;">
+                        let html = `<div class="container" style="padding: 8.75%; background-color: #5e7379;">
                                         <img src="icon.png"/>
                                         <h1 style="margin-top:5px;">Edirom Online</h1>
-                                        <h3 class="navigatorCategoryTitle">Bitte Edition auswählen</h3>
-                                        <ul>`;
+                                        <h3 class="navigatorCategoryTitle">Please select an edition</h3>
+                                        `;
                         for(var i = 0; i < editions.length; i++) {
                                         
-                            html += `<li class="navigatorItem" style="padding-bottom: 0.75em;">
-                                <i>${editions[i].name}</i>
-                                <ul>`;
+                            html += `<div class="navigatorItem" style="display: inline-table; background-color: white; border: 1px solid black; margin: 15px 30px 15px 0; padding:10px; width: 200px; height: 300px;">
+                                <h4>${editions[i].name}</h4>
+                                <p>Languages: `;
                                 
                             if(Array.isArray(editions[i].languages)) {
                                 
                                 for(var j = 0; j < editions[i].languages.length; j++) {
-                                    html += `<li><a class="x-btn" target="_self" href="index.html?edition=${editions[i].id}&amp;lang=${editions[i].languages[j]}">${editions[i].languages[j]}</a></li>`;
+                                    html += `<a target="_self" href="index.html?edition=${editions[i].id}&amp;lang=${editions[i].languages[j]}">${editions[i].languages[j]}</a>`;
+                                    if(j < editions[i].languages.length - 1) {
+                                        html += ' / ';
+                                    }
                                 }
                                 
                             }else {
-                                html += `<li><a class="x-btn" target="_self" href="index.html?edition=${editions[i].id}&amp;lang=${editions[i].languages}">${editions[i].languages}</a></li>`;
+                                html += `<a target="_self" href="index.html?edition=${editions[i].id}&amp;lang=${editions[i].languages}">${editions[i].languages}</a> `;
                             }
 
-                            html += '</ul></li>';
+                            html += '</p></div>';
                             
                         }
                         
-                        html += '</ul></div>';
+                        html += '</div>';
                         document.body.innerHTML = html;
                     }                 
 
